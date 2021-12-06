@@ -1,0 +1,14 @@
+{
+  "basePackage": "com.feiniaojin.naaf.live",
+  "entities": [
+    {
+      "controllerRequestPath": "/lr",
+      "tableName": "t_demo_item",
+      "entityName": "DemoItem",
+      "versionColumn": "version",
+      "lastModifiedDateColumn": "modified_time",
+      "createDateColumn": "created_time"
+    }
+  ]
+}
+

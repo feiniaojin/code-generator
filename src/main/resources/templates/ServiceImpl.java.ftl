@@ -38,7 +38,7 @@ public class ${classNameFirstUppercase}ServiceImpl implements ${classNameFirstUp
     }
 
     @Override
-    public PageBean<LiveRoomView> pageList(LiveRoomQuery query) {
+    public PageBean<${classNameFirstUppercase}View> pageList(${classNameFirstUppercase}Query query) {
         return null;
     }
 }

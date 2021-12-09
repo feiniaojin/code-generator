@@ -38,5 +38,5 @@ public interface ${classNameFirstUppercase}Service {
      * @param query
      * @return
      */
-    PageBean<LiveRoomView> pageList(LiveRoomQuery query);
+    PageBean<${classNameFirstUppercase}View> pageList(${classNameFirstUppercase}Query query);
 }

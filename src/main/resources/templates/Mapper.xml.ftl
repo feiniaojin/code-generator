@@ -31,15 +31,15 @@
                </#if>
             </#list>
         )
-        values (
+        <trim prefix="values (" suffix=")">
             <#list columns as column>
-               <#if column_has_next>
-        ${column.propertyNameFirstLowercase},
-               </#if>
-               <#if !column_has_next>
-        ${column.propertyNameFirstLowercase}
-               </#if>
+                   <#if column_has_next>
+            ${'#{'+column.propertyNameFirstLowercase+'}'},
+                   </#if>
+                   <#if !column_has_next>
+            ${'#{'+column.propertyNameFirstLowercase+'}'}
+                   </#if>
             </#list>
-        )
+        </trim>
     </insert>
 </mapper>

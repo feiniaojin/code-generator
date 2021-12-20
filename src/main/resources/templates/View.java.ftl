@@ -16,6 +16,6 @@ import lombok.Data;
 @Data
 public class ${classNameFirstUppercase}View implements Serializable {
     <#list columns as column>
-        private ${column.propertyType} ${column.propertyNameFirstLowercase};
+    private ${column.propertyType} ${column.propertyNameFirstLowercase};
     </#list>
 }

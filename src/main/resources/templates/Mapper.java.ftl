@@ -1,6 +1,7 @@
 package ${classPackage}.mapper;
 
 import ${classPackage}.entity.${classNameFirstUppercase};
+import org.apache.ibatis.annotations.Param;
 
 import javax.annotation.Generated;
 
@@ -13,4 +14,5 @@ import javax.annotation.Generated;
 @Generated("generator")
 public interface ${classNameFirstUppercase}Mapper {
     int insert(${classNameFirstUppercase} record);
+    ${classNameFirstUppercase} findOneById(@Param("id")Long id);
 }

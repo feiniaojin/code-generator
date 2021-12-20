@@ -15,16 +15,16 @@ public interface ${classNameFirstUppercase}Service {
     /**
      * 创建
      *
-     * @param command
+     * @param cmd
      */
-    void create(${classNameFirstUppercase}Cmd command);
+    void create(${classNameFirstUppercase}Cmd cmd);
 
     /**
      * 更新
      *
-     * @param command
+     * @param cmd
      */
-    void update(${classNameFirstUppercase}Cmd command);
+    void update(${classNameFirstUppercase}Cmd cmd);
 
     /**
      * 根据业务主键查询

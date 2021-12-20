@@ -42,4 +42,9 @@
             </#list>
         </trim>
     </insert>
+    <select id="findOneById" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumn"/>
+        from ${tableName} where id=${r'#{id}'}
+    </select>
 </mapper>

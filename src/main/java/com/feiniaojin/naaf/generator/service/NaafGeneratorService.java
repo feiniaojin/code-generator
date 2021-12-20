@@ -79,6 +79,42 @@ public class NaafGeneratorService {
         generateServiceImpl(tableEntity);
         generateExceptions(tableEntity);
         generateController(tableEntity);
+        generateAssembler(tableEntity);
+        generateXmlMapperEX(tableEntity);
+        generateJavaMapperEx(tableEntity);
+    }
+
+    private void generateJavaMapperEx(TableEntity tableEntity) throws Exception {
+        Template template = configuration.getTemplate("MapperEx.java.ftl");
+        String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, tableEntity);
+        String fileName =
+                tableEntity.getOutPutPath() + tableEntity.getClassPackage().replace(".", "/") +
+                        "/mapper/" + tableEntity.getClassNameFirstUppercase() +
+                        "MapperEx.java";
+        forceDeleteOldFile(fileName);
+        FileUtils.write(new File(fileName), text, "UTF-8");
+    }
+
+    private void generateXmlMapperEX(TableEntity tableEntity) throws Exception {
+        Template template = configuration.getTemplate("MapperEx.xml.ftl");
+        String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, tableEntity);
+        String fileName =
+                tableEntity.getOutPutPath() + tableEntity.getClassPackage().replace(".", "/") +
+                        "/mapper/" + tableEntity.getClassNameFirstUppercase() +
+                        "MapperEx.xml";
+        forceDeleteOldFile(fileName);
+        FileUtils.write(new File(fileName), text, "UTF-8");
+    }
+
+    private void generateAssembler(TableEntity tableEntity) throws Exception {
+        Template template = configuration.getTemplate("Assembler.java.ftl");
+        String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, tableEntity);
+        String fileName =
+                tableEntity.getOutPutPath() + tableEntity.getClassPackage().replace(".", "/") +
+                        "/dto/" + tableEntity.getClassNameFirstUppercase() +
+                        "Assembler.java";
+        forceDeleteOldFile(fileName);
+        FileUtils.write(new File(fileName), text, "UTF-8");
     }
 
     private void generateController(TableEntity tableEntity) throws Exception {
@@ -213,10 +249,10 @@ public class NaafGeneratorService {
         tableEntity.setControllerRequestPath(tableEntity.getControllerRequestPath());
         tableEntity.setOutPutPath(generatorConfigBean.getOutPutPath());
         //查询数据库获取表的元信息
-        Map<String, String> stringStringMap = mysqlMetaDao.queryTable(tableEntity.getTableName());
-        tableEntity.setComments(stringStringMap.get("tableComment"));
+        TableEntity tableInDb = mysqlMetaDao.queryTableMeta(tableEntity.getTableName());
+        tableEntity.setComments(tableInDb.getComments());
         //查询列信息
-        List<ColumnEntity> columnEntities = mysqlMetaDao.queryColumns(tableEntity.getTableName());
+        List<ColumnEntity> columnEntities = mysqlMetaDao.queryTableColumns(tableEntity.getTableName());
         columnEntities.stream().forEach(c -> {
             c.setPropertyType(cfg.getString(c.getDataType()));
             c.setPropertyNameFirstLowercase(columnToProperty(c.getColumnName()));

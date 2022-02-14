@@ -1,10 +1,7 @@
 package ${classPackage}.service;
 
 import com.feiniaojin.naaf.commons.data.PageBean;
-import ${classPackage}.dto.${classNameFirstUppercase}Assembler;
-import ${classPackage}.dto.${classNameFirstUppercase}Cmd;
-import ${classPackage}.dto.${classNameFirstUppercase}Query;
-import ${classPackage}.dto.${classNameFirstUppercase}View;
+import com.feiniaojin.naaf.console.dto.*;
 import ${classPackage}.entity.${classNameFirstUppercase};
 import com.feiniaojin.naaf.console.exception.${classNameFirstUppercase}Exceptions;
 import ${classPackage}.mapper.${classNameFirstUppercase}Mapper;
@@ -39,34 +36,57 @@ public class ${classNameFirstUppercase}ServiceImpl implements ${classNameFirstUp
     @Resource
     private ${classNameFirstUppercase}Repository ${classNameFirstLowercase}Repository;
 
+    @Resource
+    private ${classNameFirstUppercase}CmdAssembler cmdAssembler;
+
+    @Resource
+    private ${classNameFirstUppercase}ViewAssembler viewAssembler;
+
     private Gson gson = new Gson();
 
     @Override
     public void create(${classNameFirstUppercase}Cmd cmd) {
-        ${classNameFirstUppercase} ${classNameFirstLowercase} = ${classNameFirstUppercase}Assembler.INSTANCE.mapToEntity(cmd);
-        ${classNameFirstLowercase}Mapper.insert(${classNameFirstLowercase});
+        //根据cmd组装实体
+         ${classNameFirstUppercase} mapToEntity = cmdAssembler.mapToEntity(cmd);
+        //执行创建的初始化逻辑
+        ${classNameFirstUppercase} ${classNameFirstLowercase} = ${classNameFirstUppercase}Aggregate.from(mapToEntity).create();
+        //只有service才能调用下层的adapter，所以${classNameFirstUppercase}Aggregate.create执行完成之后，在此处填充业务id
+
+        log.info("${classNameFirstUppercase} create:cmd=[{}],${classNameFirstLowercase}=[{}]", gson.toJson(cmd), gson.toJson(${classNameFirstLowercase}));
+        ${classNameFirstLowercase}Repository.save(${classNameFirstLowercase});
     }
 
     @Override
     public void update(${classNameFirstUppercase}Cmd cmd) {
-
+        //查询数据
+        Optional<${classNameFirstUppercase}> byId = ${classNameFirstLowercase}Repository.findById(cmd.getId());
+        if (!byId.isPresent()) {
+            log.error("查询不到数据,cmd=[{}]", gson.toJson(cmd));
+            throw new ${classNameFirstUppercase}Exceptions.NotFoundException();
+        }
+        //cmd转换为实体，作为输入
+        ${classNameFirstUppercase} input = cmdAssembler.mapToEntity(cmd);
+        //获取数据库对应实体
+        ${classNameFirstUppercase} ${classNameFirstLowercase} = byId.get();
+        //执行业务更新
+        ${classNameFirstUppercase}Aggregate.from(${classNameFirstLowercase}).update(input);
+        //保存
+        log.info("${classNameFirstUppercase} update:cmd=[{}],${classNameFirstLowercase}=[{}]", gson.toJson(cmd), gson.toJson(${classNameFirstLowercase}));
+        ${classNameFirstLowercase}Repository.save(${classNameFirstLowercase});
     }
 
     @Override
     public ${classNameFirstUppercase}View get(${classNameFirstUppercase}Query query) {
-
-        Long id = query.getId();
-
-        ${classNameFirstUppercase} ${classNameFirstLowercase} = ${classNameFirstLowercase}Mapper.findOneById(id);
-
-        if (${classNameFirstLowercase} == null) {
-            log.error("查询不到数据,query=[{}]", gson.toJson(query));
-            throw new ${classNameFirstUppercase}Exceptions.NotFoundException();
-        }
-
-        ${classNameFirstUppercase}View ${classNameFirstLowercase}View = ${classNameFirstUppercase}Assembler.INSTANCE.mapToView(${classNameFirstLowercase});
-
-        return ${classNameFirstLowercase}View;
+       //查询数据
+       Long id = query.getId();
+       ${classNameFirstUppercase} ${classNameFirstLowercase} = ${classNameFirstLowercase}Mapper.findOneById(id);
+       if (${classNameFirstLowercase} == null) {
+           log.error("查询不到数据,query=[{}]", gson.toJson(query));
+           throw new ${classNameFirstUppercase}Exceptions.NotFoundException();
+       }
+       //拼接为view
+       ${classNameFirstUppercase}View view = viewAssembler.mapToView(${classNameFirstLowercase});
+       return view;
     }
 
     @Override
@@ -90,7 +110,7 @@ public class ${classNameFirstUppercase}ServiceImpl implements ${classNameFirstUp
 
         List<${classNameFirstUppercase}> ${classNameFirstLowercase}List = ${classNameFirstLowercase}MapperEx.pageList(paramMap);
 
-        List<${classNameFirstUppercase}View> views = ${classNameFirstUppercase}Assembler.INSTANCE.mapToViewList(${classNameFirstLowercase}List);
+        List<${classNameFirstUppercase}View> views = viewAssembler.mapToViewList(${classNameFirstLowercase}List);
 
         pageBean.setList(views);
 

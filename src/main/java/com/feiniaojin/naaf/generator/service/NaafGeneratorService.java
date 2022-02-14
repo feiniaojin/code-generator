@@ -76,12 +76,26 @@ public class NaafGeneratorService {
         generateQuery(tableEntity);
         generateDtoView(tableEntity);
         generateService(tableEntity);
+        generateAggregate(tableEntity);
         generateServiceImpl(tableEntity);
         generateExceptions(tableEntity);
         generateController(tableEntity);
-        generateAssembler(tableEntity);
+        generateCmdAssembler(tableEntity);
+        generateViewAssembler(tableEntity);
         generateXmlMapperEX(tableEntity);
         generateJavaMapperEx(tableEntity);
+        generateCmdAssembler(tableEntity);
+    }
+
+    private void generateAggregate(TableEntity tableEntity)throws Exception {
+        Template template = configuration.getTemplate("Aggregate.java.ftl");
+        String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, tableEntity);
+        String fileName =
+                tableEntity.getOutPutPath() + tableEntity.getClassPackage().replace(".", "/") +
+                        "/service/" + tableEntity.getClassNameFirstUppercase() +
+                        "Aggregate.java";
+        forceDeleteOldFile(fileName);
+        FileUtils.write(new File(fileName), text, "UTF-8");
     }
 
     private void generateJavaMapperEx(TableEntity tableEntity) throws Exception {
@@ -106,13 +120,24 @@ public class NaafGeneratorService {
         FileUtils.write(new File(fileName), text, "UTF-8");
     }
 
-    private void generateAssembler(TableEntity tableEntity) throws Exception {
-        Template template = configuration.getTemplate("Assembler.java.ftl");
+    private void generateCmdAssembler(TableEntity tableEntity) throws Exception {
+        Template template = configuration.getTemplate("CmdAssembler.java.ftl");
         String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, tableEntity);
         String fileName =
                 tableEntity.getOutPutPath() + tableEntity.getClassPackage().replace(".", "/") +
                         "/dto/" + tableEntity.getClassNameFirstUppercase() +
-                        "Assembler.java";
+                        "CmdAssembler.java";
+        forceDeleteOldFile(fileName);
+        FileUtils.write(new File(fileName), text, "UTF-8");
+    }
+
+    private void generateViewAssembler(TableEntity tableEntity) throws Exception {
+        Template template = configuration.getTemplate("ViewAssembler.java.ftl");
+        String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, tableEntity);
+        String fileName =
+                tableEntity.getOutPutPath() + tableEntity.getClassPackage().replace(".", "/") +
+                        "/dto/" + tableEntity.getClassNameFirstUppercase() +
+                        "ViewAssembler.java";
         forceDeleteOldFile(fileName);
         FileUtils.write(new File(fileName), text, "UTF-8");
     }

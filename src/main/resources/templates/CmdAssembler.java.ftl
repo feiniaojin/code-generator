@@ -21,7 +21,7 @@ public class ${classNameFirstUppercase}CmdAssembler {
         return ${classNameFirstLowercase};
     }
 
-    @Mapper
+    @Mapper(componentModel = "spring")
     public interface ${classNameFirstUppercase}CmdMapper {
         ${classNameFirstUppercase}CmdMapper INSTANCE = Mappers.getMapper(${classNameFirstUppercase}CmdMapper.class);
 

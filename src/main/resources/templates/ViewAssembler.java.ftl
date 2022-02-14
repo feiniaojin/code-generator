@@ -29,7 +29,7 @@ public class ${classNameFirstUppercase}ViewAssembler {
         return viewList;
     }
 
-    @Mapper
+    @Mapper(componentModel = "spring")
     public interface ${classNameFirstUppercase}ViewMapper {
         ${classNameFirstUppercase}ViewMapper INSTANCE = Mappers.getMapper(${classNameFirstUppercase}ViewMapper.class);
 

@@ -27,5 +27,5 @@ public interface ${classNameFirstUppercase}MapperEx {
      * @param paramMap
      * @return
      */
-    List<LiveRoom> pageList(Map<String, Object> paramMap);
+    List<${classNameFirstUppercase}> pageList(Map<String, Object> paramMap);
 }

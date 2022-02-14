@@ -8,5 +8,6 @@ import com.feiniaojin.naaf.ngr.def.ExceptionMapper;
  * 表注释：${comments}
  */
 public class ${classNameFirstUppercase}Exceptions {
-
+    @ExceptionMapper(code = 1404,msg = "找不到该资源")
+    public static final class NotFoundException extends RuntimeException{}
 }

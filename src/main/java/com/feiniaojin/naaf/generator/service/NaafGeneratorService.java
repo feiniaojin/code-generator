@@ -89,7 +89,7 @@ public class NaafGeneratorService {
         String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, tableEntity);
         String fileName =
                 tableEntity.getOutPutPath() + tableEntity.getClassPackage().replace(".", "/") +
-                        "/mapper/" + tableEntity.getClassNameFirstUppercase() +
+                        "/jmapper/" + tableEntity.getClassNameFirstUppercase() +
                         "MapperEx.java";
         forceDeleteOldFile(fileName);
         FileUtils.write(new File(fileName), text, "UTF-8");
@@ -100,7 +100,7 @@ public class NaafGeneratorService {
         String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, tableEntity);
         String fileName =
                 tableEntity.getOutPutPath() + tableEntity.getClassPackage().replace(".", "/") +
-                        "/mapper/" + tableEntity.getClassNameFirstUppercase() +
+                        "/xmapper/" + tableEntity.getClassNameFirstUppercase() +
                         "MapperEx.xml";
         forceDeleteOldFile(fileName);
         FileUtils.write(new File(fileName), text, "UTF-8");
@@ -199,7 +199,7 @@ public class NaafGeneratorService {
         String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, tableEntity);
         String fileName =
                 tableEntity.getOutPutPath() + tableEntity.getClassPackage().replace(".", "/") +
-                        "/mapper/" + tableEntity.getClassNameFirstUppercase() +
+                        "/jmapper/" + tableEntity.getClassNameFirstUppercase() +
                         "Mapper.java";
         forceDeleteOldFile(fileName);
         FileUtils.write(new File(fileName), text, "UTF-8");
@@ -221,7 +221,7 @@ public class NaafGeneratorService {
         String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, tableEntity);
         String fileName =
                 tableEntity.getOutPutPath() + tableEntity.getClassPackage().replace(".", "/") +
-                        "/mapper/" + tableEntity.getClassNameFirstUppercase() +
+                        "/xmapper/" + tableEntity.getClassNameFirstUppercase() +
                         "Mapper.xml";
         forceDeleteOldFile(fileName);
         FileUtils.write(new File(fileName), text, "UTF-8");

@@ -1,10 +1,34 @@
 {
-  "basePackage": "com.feiniaojin.naaf.live",
+  "basePackage": "com.feiniaojin.naaf.console",
   "entities": [
     {
-      "controllerRequestPath": "/lr",
-      "tableName": "t_demo_item",
-      "entityName": "DemoItem",
+      "controllerRequestPath": "/sysUser",
+      "tableName": "sys_user",
+      "entityName": "SysUser",
+      "versionColumn": "version",
+      "lastModifiedDateColumn": "modified_time",
+      "createDateColumn": "created_time"
+    },
+    {
+      "controllerRequestPath": "/uinfo",
+      "tableName": "u_user_info",
+      "entityName": "UserInfo",
+      "versionColumn": "version",
+      "lastModifiedDateColumn": "modified_time",
+      "createDateColumn": "created_time"
+    },
+    {
+      "controllerRequestPath": "/sysResource",
+      "tableName": "sys_resource",
+      "entityName": "SysResource",
+      "versionColumn": "version",
+      "lastModifiedDateColumn": "modified_time",
+      "createDateColumn": "created_time"
+    },
+    {
+      "controllerRequestPath": "/sysRole",
+      "tableName": "sys_role",
+      "entityName": "SysRole",
       "versionColumn": "version",
       "lastModifiedDateColumn": "modified_time",
       "createDateColumn": "created_time"

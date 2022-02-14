@@ -6,9 +6,12 @@ import ${classPackage}.dto.${classNameFirstUppercase}Cmd;
 import ${classPackage}.dto.${classNameFirstUppercase}Query;
 import ${classPackage}.dto.${classNameFirstUppercase}View;
 import ${classPackage}.entity.${classNameFirstUppercase};
+import com.feiniaojin.naaf.console.exception.${classNameFirstUppercase}Exceptions;
 import ${classPackage}.mapper.${classNameFirstUppercase}Mapper;
 import ${classPackage}.mapper.${classNameFirstUppercase}MapperEx;
 import ${classPackage}.repository.${classNameFirstUppercase}Repository;
+import com.google.gson.Gson;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +19,7 @@ import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * ${classNameFirstUppercase}类Service实现类
@@ -23,6 +27,7 @@ import java.util.Map;
  * 表注释：${comments}
  */
 @Service
+@Slf4j
 public class ${classNameFirstUppercase}ServiceImpl implements ${classNameFirstUppercase}Service {
 
     @Resource
@@ -34,10 +39,12 @@ public class ${classNameFirstUppercase}ServiceImpl implements ${classNameFirstUp
     @Resource
     private ${classNameFirstUppercase}Repository ${classNameFirstLowercase}Repository;
 
+    private Gson gson = new Gson();
+
     @Override
     public void create(${classNameFirstUppercase}Cmd cmd) {
         ${classNameFirstUppercase} ${classNameFirstLowercase} = ${classNameFirstUppercase}Assembler.INSTANCE.mapToEntity(cmd);
-        ${classNameFirstLowercase}Mapper.insert(liveRoom);
+        ${classNameFirstLowercase}Mapper.insert(${classNameFirstLowercase});
     }
 
     @Override
@@ -52,8 +59,9 @@ public class ${classNameFirstUppercase}ServiceImpl implements ${classNameFirstUp
 
         ${classNameFirstUppercase} ${classNameFirstLowercase} = ${classNameFirstLowercase}Mapper.findOneById(id);
 
-        if (!Optional.of(${classNameFirstLowercase}).isPresent()) {
-            throw new RuntimeException();
+        if (${classNameFirstLowercase} == null) {
+            log.error("查询不到数据,query=[{}]", gson.toJson(query));
+            throw new ${classNameFirstUppercase}Exceptions.NotFoundException();
         }
 
         ${classNameFirstUppercase}View ${classNameFirstLowercase}View = ${classNameFirstUppercase}Assembler.INSTANCE.mapToView(${classNameFirstLowercase});
@@ -64,7 +72,7 @@ public class ${classNameFirstUppercase}ServiceImpl implements ${classNameFirstUp
     @Override
     public PageBean<${classNameFirstUppercase}View> pageList(${classNameFirstUppercase}Query query) {
 
-        PageBean<LiveRoomView> pageBean = new PageBean<>();
+        PageBean<${classNameFirstUppercase}View> pageBean = new PageBean<>();
 
         //TODO 填充查询参数
         Map<String, Object> paramMap = new HashMap<>();

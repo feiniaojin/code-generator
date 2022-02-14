@@ -31,7 +31,7 @@ public class ${classNameFirstUppercase}Controller {
     }
 
     @RequestMapping("/detail")
-    public LiveRoomView detail(${classNameFirstUppercase}Query query){
+    public ${classNameFirstUppercase}View detail(${classNameFirstUppercase}Query query){
         return ${classNameFirstLowercase}Service.get(query);
     }
 

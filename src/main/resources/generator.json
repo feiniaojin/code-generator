@@ -32,6 +32,23 @@
       "versionColumn": "version",
       "lastModifiedDateColumn": "modified_time",
       "createDateColumn": "created_time"
+    },
+    {
+      "controllerRequestPath": "/sysRoleRelResource",
+      "tableName": "sys_role_rel_resource",
+      "entityName": "SysRoleRelResource",
+      "versionColumn": "version",
+      "lastModifiedDateColumn": "modified_time",
+      "createDateColumn": "created_time"
+    }
+  ,
+    {
+      "controllerRequestPath": "/sysUserRelRole",
+      "tableName": "sys_user_rel_role",
+      "entityName": "SysUserRelRole",
+      "versionColumn": "version",
+      "lastModifiedDateColumn": "modified_time",
+      "createDateColumn": "created_time"
     }
   ]
 }

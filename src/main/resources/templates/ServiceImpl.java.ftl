@@ -42,18 +42,19 @@ public class ${classNameFirstUppercase}ServiceImpl implements ${classNameFirstUp
     @Resource
     private ${classNameFirstUppercase}ViewAssembler viewAssembler;
 
+    @Resource
+    private ${classNameFirstUppercase}AggregateFactory factory;
+
     private Gson gson = new Gson();
 
     @Override
     public void create(${classNameFirstUppercase}Cmd cmd) {
         //根据cmd组装实体
-         ${classNameFirstUppercase} mapToEntity = cmdAssembler.mapToEntity(cmd);
+        ${classNameFirstUppercase}Aggregate aggregate = factory.newFromCmd(cmd);
         //执行创建的初始化逻辑
-        ${classNameFirstUppercase} ${classNameFirstLowercase} = ${classNameFirstUppercase}Aggregate.from(mapToEntity).create();
-        //只有service才能调用下层的adapter，所以${classNameFirstUppercase}Aggregate.create执行完成之后，在此处填充业务id
-
-        log.info("${classNameFirstUppercase} create:cmd=[{}],${classNameFirstLowercase}=[{}]", gson.toJson(cmd), gson.toJson(${classNameFirstLowercase}));
-        ${classNameFirstLowercase}Repository.save(${classNameFirstLowercase});
+        aggregate.create();
+        log.info("${classNameFirstUppercase} create:cmd=[{}],aggregate=[{}]", gson.toJson(cmd), gson.toJson(aggregate));
+        ${classNameFirstLowercase}Repository.save(aggregate.getEntity());
     }
 
     @Override
@@ -69,10 +70,11 @@ public class ${classNameFirstUppercase}ServiceImpl implements ${classNameFirstUp
         //获取数据库对应实体
         ${classNameFirstUppercase} ${classNameFirstLowercase} = byId.get();
         //执行业务更新
-        ${classNameFirstUppercase}Aggregate.from(${classNameFirstLowercase}).update(input);
+        ${classNameFirstUppercase}Aggregate aggregate = factory.fromEntity(${classNameFirstLowercase});
+        aggregate.update(input);
         //保存
         log.info("${classNameFirstUppercase} update:cmd=[{}],${classNameFirstLowercase}=[{}]", gson.toJson(cmd), gson.toJson(${classNameFirstLowercase}));
-        ${classNameFirstLowercase}Repository.save(${classNameFirstLowercase});
+        ${classNameFirstLowercase}Repository.save(aggregate.getEntity());
     }
 
     @Override

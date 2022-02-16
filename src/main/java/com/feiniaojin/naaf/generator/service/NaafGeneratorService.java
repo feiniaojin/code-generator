@@ -77,6 +77,7 @@ public class NaafGeneratorService {
         generateDtoView(tableEntity);
         generateService(tableEntity);
         generateAggregate(tableEntity);
+        generateAggregateFactory(tableEntity);
         generateServiceImpl(tableEntity);
         generateExceptions(tableEntity);
         generateController(tableEntity);
@@ -85,6 +86,17 @@ public class NaafGeneratorService {
         generateXmlMapperEX(tableEntity);
         generateJavaMapperEx(tableEntity);
         generateCmdAssembler(tableEntity);
+    }
+
+    private void generateAggregateFactory(TableEntity tableEntity)throws Exception {
+        Template template = configuration.getTemplate("AggregateFactory.java.ftl");
+        String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, tableEntity);
+        String fileName =
+                tableEntity.getOutPutPath() + tableEntity.getClassPackage().replace(".", "/") +
+                        "/service/" + tableEntity.getClassNameFirstUppercase() +
+                        "AggregateFactory.java";
+        forceDeleteOldFile(fileName);
+        FileUtils.write(new File(fileName), text, "UTF-8");
     }
 
     private void generateAggregate(TableEntity tableEntity)throws Exception {

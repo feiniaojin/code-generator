@@ -1,27 +1,16 @@
 package ${classPackage}.service;
 
+import lombok.Data;
 import ${classPackage}.entity.${classNameFirstUppercase};
 import org.apache.commons.lang.StringUtils;
 
 /**
  * SysResourceModel的定位是承接业务逻辑，model中不允许调用数据库、缓存
  */
+@Data
 public class ${classNameFirstUppercase}Aggregate {
 
     private ${classNameFirstUppercase} entity;
-
-    private ${classNameFirstUppercase}Aggregate() {
-
-    }
-
-    private ${classNameFirstUppercase}Aggregate(${classNameFirstUppercase} entity) {
-        this();
-        this.entity = entity;
-    }
-
-    public static ${classNameFirstUppercase}Aggregate from(${classNameFirstUppercase} entity) {
-        return new ${classNameFirstUppercase}Aggregate(entity);
-    }
 
     /**
      * 执行初始化逻辑
@@ -40,7 +29,7 @@ public class ${classNameFirstUppercase}Aggregate {
      * @return
      */
     public ${classNameFirstUppercase} update(${classNameFirstUppercase} newEntity) {
-
+        //更新的具体逻辑
         return entity;
     }
 }

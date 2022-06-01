@@ -2,17 +2,33 @@
   "basePackage": "com.feiniaojin.naaf.console",
   "entities": [
     {
-      "controllerRequestPath": "/sysUser",
-      "tableName": "sys_user",
-      "entityName": "SysUser",
+      "controllerRequestPath": "/sysAccount",
+      "tableName": "sys_account",
+      "entityName": "SysAccount",
       "versionColumn": "version",
       "lastModifiedDateColumn": "modified_time",
       "createDateColumn": "created_time"
     },
     {
-      "controllerRequestPath": "/uinfo",
-      "tableName": "u_user_info",
-      "entityName": "UserInfo",
+      "controllerRequestPath": "/sysUserEvent",
+      "tableName": "sys_user_event",
+      "entityName": "SysUserEvent",
+      "versionColumn": "version",
+      "lastModifiedDateColumn": "modified_time",
+      "createDateColumn": "created_time"
+    },
+    {
+      "controllerRequestPath": "/sysAccountRelUser",
+      "tableName": "sys_account_rel_user",
+      "entityName": "SysAccountRelUser",
+      "versionColumn": "version",
+      "lastModifiedDateColumn": "modified_time",
+      "createDateColumn": "created_time"
+    },
+    {
+      "controllerRequestPath": "/sysUser",
+      "tableName": "sys_user",
+      "entityName": "SysUser",
       "versionColumn": "version",
       "lastModifiedDateColumn": "modified_time",
       "createDateColumn": "created_time"

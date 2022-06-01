@@ -1,6 +1,6 @@
 package ${classPackage}.mapper;
 
-import ${classPackage}.entity.${classNameFirstUppercase};
+import ${classPackage}.data.${classNameFirstUppercase};
 
 import javax.annotation.Generated;
 import java.util.List;

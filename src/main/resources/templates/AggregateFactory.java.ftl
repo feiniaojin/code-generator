@@ -3,7 +3,7 @@ package ${classPackage}.service;
 //import ${classPackage}.adapter.id.IdGeneratorAdapter;
 import ${classPackage}.dto.${classNameFirstUppercase}Cmd;
 import ${classPackage}.dto.${classNameFirstUppercase}CmdAssembler;
-import ${classPackage}.entity.${classNameFirstUppercase};
+import ${classPackage}.data.${classNameFirstUppercase};
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

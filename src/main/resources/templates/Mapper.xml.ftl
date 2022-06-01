@@ -5,7 +5,7 @@
 -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="${classPackage}.mapper.${classNameFirstUppercase}Mapper">
-    <resultMap id="BaseResultMap" type="${classPackage}.entity.${classNameFirstUppercase}">
+    <resultMap id="BaseResultMap" type="${classPackage}.data.${classNameFirstUppercase}">
     <#list columns as column>
         <result column="${column.columnName}" property="${column.propertyNameFirstLowercase}"/>
     </#list>
@@ -20,7 +20,7 @@
        </#if>
       </#list>
     </sql>
-    <insert id="insert" parameterType="${classPackage}.entity.${classNameFirstUppercase}">
+    <insert id="insert" parameterType="${classPackage}.data.${classNameFirstUppercase}">
         insert into ${tableName} (
             <#list columns as column>
                <#if column_has_next>

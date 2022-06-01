@@ -1,6 +1,6 @@
 package ${classPackage}.mapper;
 
-import ${classPackage}.entity.${classNameFirstUppercase};
+import ${classPackage}.data.${classNameFirstUppercase};
 import org.apache.ibatis.annotations.Param;
 
 import javax.annotation.Generated;

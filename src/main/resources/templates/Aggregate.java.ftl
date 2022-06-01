@@ -1,7 +1,7 @@
 package ${classPackage}.service;
 
 import lombok.Data;
-import ${classPackage}.entity.${classNameFirstUppercase};
+import ${classPackage}.data.${classNameFirstUppercase};
 import org.apache.commons.lang.StringUtils;
 
 /**

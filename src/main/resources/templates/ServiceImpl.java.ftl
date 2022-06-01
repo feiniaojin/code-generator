@@ -2,7 +2,7 @@ package ${classPackage}.service;
 
 import com.feiniaojin.naaf.commons.data.PageBean;
 import com.feiniaojin.naaf.console.dto.*;
-import ${classPackage}.entity.${classNameFirstUppercase};
+import ${classPackage}.data.${classNameFirstUppercase};
 import com.feiniaojin.naaf.console.exception.${classNameFirstUppercase}Exceptions;
 import ${classPackage}.mapper.${classNameFirstUppercase}Mapper;
 import ${classPackage}.mapper.${classNameFirstUppercase}MapperEx;

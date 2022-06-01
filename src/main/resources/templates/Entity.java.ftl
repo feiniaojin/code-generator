@@ -1,4 +1,4 @@
-package ${classPackage}.entity;
+package ${classPackage}.data;
 
 import lombok.Data;
 <#if createDateColumn??>

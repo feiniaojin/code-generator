@@ -269,7 +269,7 @@ public class NaafGeneratorService {
         String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, tableEntity);
         String fileName =
                 tableEntity.getOutPutPath() + tableEntity.getClassPackage().replace(".", "/") +
-                        "/entity/" + tableEntity.getClassNameFirstUppercase() +
+                        "/data/" + tableEntity.getClassNameFirstUppercase() +
                         ".java";
         forceDeleteOldFile(fileName);
         FileUtils.write(new File(fileName), text, "UTF-8");

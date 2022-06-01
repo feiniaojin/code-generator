@@ -1,6 +1,6 @@
 package ${classPackage}.repository;
 
-import ${classPackage}.entity.${classNameFirstUppercase};
+import ${classPackage}.data.${classNameFirstUppercase};
 import org.springframework.data.repository.CrudRepository;
 
 /**
